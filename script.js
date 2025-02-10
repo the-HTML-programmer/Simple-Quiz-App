@@ -53,7 +53,7 @@ const questions = [
 
 
 
-//get Dom elements
+//get DOM elements
 const displayQuestion = document.getElementById(`question`);
 const answerBtns = document.getElementById(`answerBtns`);
 const nextBtn = document.getElementById(`nextBtn`);
@@ -83,11 +83,20 @@ function showQuestion() {
         button.classList.add(`btn`);
         button.addEventListener(`click`, () => handleAnswer(option, button));
         answerBtns.appendChild(button);
-progressIndicator.innerHTML = `Question ${currentQuestionIndex + 1} of ${questions.length}`
+        progressIndicator.innerHTML = `Question ${currentQuestionIndex + 1} of ${questions.length}`
     });
     //nextBtn[0].style.display = `none`
     
 }
+
+function showFinalScore(){
+    displayQuestion.innerHTML =` You have completed the Quiz!`;
+    answerBtns.innerHTML= `Your final score is ${score}/ ${questions.length}`;
+    nextBtn.innerHTML =`Restart Quiz`;
+    nextBtn.style.display =` block`;
+    nextBtn.onclick = startQuiz;
+}
+
 nextBtn.addEventListener(`click`, () => {
     currentQuestionIndex++;
     if (currentQuestionIndex < questions.length) {
@@ -98,7 +107,6 @@ nextBtn.addEventListener(`click`, () => {
 })
 
 
-// showQuestion()
 
 function handleAnswer(selectedAns, button) {
     Array.from(answerBtns.children).forEach(btn => btn.disabled = true);
@@ -119,22 +127,8 @@ function handleAnswer(selectedAns, button) {
     nextBtn[0].style.display = `block`;
 }
 
-function showFinalScore(){
-    displayQuestion.innerHTML =` You have completed the Quiz!`;
-    answerBtns.innerHTML= `Your final score is ${score}/ ${questions.length}`;
-    nextBtn.innerHTML =`Restart Quiz`;
-    nextBtn.style.display =` block`;
-    nextBtn.onclick = startQuiz;
-}
 
-
-
-
-
-showQuestion();
-
-
-
+startQuiz()
 
 
 
